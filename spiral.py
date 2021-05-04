@@ -5,13 +5,6 @@ from collections import namedtuple
 
 Point = namedtuple("Point", "x y")
 
-point_transforms = [
-    lambda dist: Point(-1 * dist, 0),
-    lambda dist: Point(0, 1 * dist),
-    lambda dist: Point(1 * dist, 0),
-    lambda dist: Point(0, -1 * dist),
-]
-
 
 def get_square(j):
     return ceil(sqrt(j) / 2)
@@ -40,35 +33,36 @@ def get_position_on_side(j):
     return get_normalised_j(j) % get_side_length(j)
 
 
-def get_square_anchor_point(square):
+def get_square_anchor_point(j):
+    square = get_square(j)
     return Point((square - 1), -(square - 1))
 
 
-def get_side_anchor_point(square, side):
-    translation_to_next_anchor = [Point(0, 1), Point(1, 0), Point(0, -1)]
-    side_anchor = []
-    side_anchor.append(get_square_anchor_point(square))
-    side_length = square * 2 - 2  # explain the -2
+def get_side_anchor_point(j):
+    side_anchor = get_square_anchor_point(j)
+    side = get_side(j)
+    side_length = get_side_length(j)
 
-    for i in range(0, 3):
-        side_end = Point(
-            side_anchor[i].x + point_transforms[i](side_length).x,
-            side_anchor[i].y + point_transforms[i](side_length).y,
-        )
-
-        side_anchor.append(
-            Point(
-                side_end.x + translation_to_next_anchor[i].x,
-                side_end.y + translation_to_next_anchor[i].y,
-            )
-        )
-
-    return side_anchor[side]
+    if side == 0:
+        return side_anchor
+    if side == 1:
+        return Point(side_anchor.x - side_length + 1, side_anchor.y + 1)
+    if side == 2:
+        return Point(side_anchor.x - side_length + 2, side_anchor.y + side_length)
+    # side == 3
+    return Point(side_anchor.x + 1, side_anchor.y + side_length - 1)
 
 
 def calc(i):
-    side_anchor_point = get_side_anchor_point(get_square(i), get_side(i))
+    point_translations = [
+        lambda dist: Point(-1 * dist, 0),
+        lambda dist: Point(0, 1 * dist),
+        lambda dist: Point(1 * dist, 0),
+        lambda dist: Point(0, -1 * dist),
+    ]
+
+    side_anchor_point = get_side_anchor_point(i)
     position = get_position_on_side(i)
-    translation = point_transforms[get_side(i)](position)
+    translation = point_translations[get_side(i)](position)
     point = (side_anchor_point.x + translation.x, side_anchor_point.y + translation.y)
     return point

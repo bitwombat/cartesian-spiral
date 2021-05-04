@@ -70,24 +70,24 @@ def test_get_position_on_side():
 
 
 def test_get_side_anchor_point():
-    assert get_side_anchor_point(1, 0) == (0, 0)
-    assert get_side_anchor_point(1, 1) == (0, 1)
-    assert get_side_anchor_point(1, 2) == (1, 1)
-    assert get_side_anchor_point(1, 3) == (1, 0)
+    assert get_side_anchor_point(1) == (0, 0)
+    assert get_side_anchor_point(2) == (0, 1)
+    assert get_side_anchor_point(3) == (1, 1)
+    assert get_side_anchor_point(4) == (1, 0)
 
-    assert get_side_anchor_point(2, 0) == (1, -1)
-    assert get_side_anchor_point(2, 1) == (-1, 0)
-    assert get_side_anchor_point(2, 2) == (0, 2)
-    assert get_side_anchor_point(2, 3) == (2, 1)
+    assert get_side_anchor_point(5) == (1, -1)
+    assert get_side_anchor_point(8) == (-1, 0)
+    assert get_side_anchor_point(11) == (0, 2)
+    assert get_side_anchor_point(14) == (2, 1)
 
-    assert get_side_anchor_point(3, 0) == (2, -2)
-    assert get_side_anchor_point(3, 1) == (-2, -1)
-    assert get_side_anchor_point(3, 2) == (-1, 3)
-    assert get_side_anchor_point(3, 3) == (3, 2)
+    assert get_side_anchor_point(17) == (2, -2)
+    assert get_side_anchor_point(22) == (-2, -1)
+    assert get_side_anchor_point(27) == (-1, 3)
+    assert get_side_anchor_point(32) == (3, 2)
 
 
 def test_get_square_anchor_point():
     assert get_square_anchor_point(1) == (0, 0)
-    assert get_square_anchor_point(2) == (1, -1)
-    assert get_square_anchor_point(3) == (2, -2)
-    assert get_square_anchor_point(4) == (3, -3)
+    assert get_square_anchor_point(5) == (1, -1)
+    assert get_square_anchor_point(17) == (2, -2)
+    assert get_square_anchor_point(37) == (3, -3)
