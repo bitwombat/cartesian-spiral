@@ -3,4 +3,4 @@ variable-rgx=^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$
 argument-rgx=^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$
 
 [MESSAGES CONTROL]
-disable=trailing-newlines,missing-class-docstring,missing-function-docstring,too-many-arguments,too-few-public-methods
+disable=trailing-newlines,missing-module-docstring,missing-class-docstring,missing-function-docstring,too-many-arguments,too-few-public-methods
