@@ -64,5 +64,4 @@ def calc(i):
     side_anchor_point = get_side_anchor_point(i)
     position = get_position_on_side(i)
     translation = point_translations[get_side(i)](position)
-    point = (side_anchor_point.x + translation.x, side_anchor_point.y + translation.y)
-    return point
+    return (side_anchor_point.x + translation.x, side_anchor_point.y + translation.y)
